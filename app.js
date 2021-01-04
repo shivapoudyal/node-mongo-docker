@@ -68,7 +68,7 @@ app.get('/people', async (req, res) => {
 });
 
 mongoose.connect(
-  'mongodb://mongodb:27017/shivadb_new',
+  'mongodb://db:27017/shivadb_new', //*db is the mongo container name
   { useNewUrlParser: true },
   (err) => {
     if (err) {
