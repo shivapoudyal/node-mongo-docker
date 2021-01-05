@@ -69,6 +69,7 @@ app.get('/people', async (req, res) => {
 
 mongoose.connect(
   'mongodb://db:27017/shivadb_new', //*db is the mongo container name
+  //'mongodb://yourMongodbUserName:yourMongodbPassword@db:27017/shivadb_new?authSource=admin', //if there is any username and password of mongo db (?authSource=admin -> this part is static)
   { useNewUrlParser: true },
   (err) => {
     if (err) {
