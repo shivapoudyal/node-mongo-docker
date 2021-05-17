@@ -6,13 +6,15 @@ services:
     ports:
       - "3000:3000"
     container_name: nodeapp
-    links:  
-      - mongodb 
-      
-  mongodb:
-    image: mongo
-    container_name: db
-    volumes: 
-      - /var/www/node-mongo-docker/data:/data/db/
-    ports: 
-      - "27017:27017"
+    env_file:
+      - ./mongo.env
+  #   links:
+  #     - mongodb
+  #
+  # mongodb:
+  #   image: mongo
+  #   container_name: db
+  #   volumes:
+  #     - /var/www/node-mongo-docker/data:/data/db/
+  #   ports:
+  #     - "27017:27017"
