@@ -68,8 +68,11 @@ app.get('/people', async (req, res) => {
 });
 
 mongoose.connect(
-  'mongodb://db:27017/shivadb_new', //*db is the mongo container name
+  //'mongodb://db:27017/shivadb_new', //*db is the mongo container name
   //'mongodb://yourMongodbUserName:yourMongodbPassword@db:27017/shivadb_new?authSource=admin', //if there is any username and password of mongo db (?authSource=admin -> this part is static)
+  
+  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URL}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`,
+  
   { useNewUrlParser: true },
   (err) => {
     if (err) {
