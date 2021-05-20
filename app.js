@@ -2,81 +2,42 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios').default;
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-const Favorite = require('./models/favorite');
+var shivaSchema = new Schema({
+  name: { type: String }
+});
+
+var mySchema = mongoose.model('shiva_collection', shivaSchema);
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/favorites', async (req, res) => {
-  const favorites = await Favorite.find();
-  res.status(200).json({
-    favorites: favorites,
-  });
-});
+app.get('/shiva_url', async (req, res) => {
 
-app.post('/favorites', async (req, res) => {
-  const favName = req.body.name;
-  const favType = req.body.type;
-  const favUrl = req.body.url;
-
-  try {
-    if (favType !== 'movie' && favType !== 'character') {
-      throw new Error('"type" should be "movie" or "character"!');
+  mySchema.find({}, function(err, data) {
+    if(err){
+      res.send("========================Something wrong=======================");
+      next();
     }
-    const existingFav = await Favorite.findOne({ name: favName });
-    if (existingFav) {
-      throw new Error('Favorite exists already!');
-    }
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
 
-  const favorite = new Favorite({
-    name: favName,
-    type: favType,
-    url: favUrl,
+    res.status(200).json({
+    data: data,
+    });
+
   });
 
-  try {
-    await favorite.save();
-    res
-      .status(201)
-      .json({ message: 'Favorite saved!', favorite: favorite.toObject() });
-  } catch (error) {
-    res.status(500).json({ message: 'Something went wrong.' });
-  }
-});
-
-app.get('/movies', async (req, res) => {
-  try {
-    const response = await axios.get('https://swapi.dev/api/films');
-    res.status(200).json({ movies: response.data });
-  } catch (error) {
-    res.status(500).json({ message: 'Something went wrong.' });
-  }
-});
-
-app.get('/people', async (req, res) => {
-  try {
-    const response = await axios.get('https://swapi.dev/api/people');
-    res.status(200).json({ people: response.data });
-  } catch (error) {
-    res.status(500).json({ message: 'Something went wrong.' });
-  }
 });
 
 mongoose.connect(
-  //'mongodb://db:27017/shivadb_new', //*db is the mongo container name
-  //'mongodb://yourMongodbUserName:yourMongodbPassword@db:27017/shivadb_new?authSource=admin', //if there is any username and password of mongo db (?authSource=admin -> this part is static)
-  
-  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URL}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`,
-  
+  //`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URL}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`,
+  'mongodb+srv://prem:12345@cluster0.vfu2v.mongodb.net/shiva_db?retryWrites=true&w=majority',
+
   { useNewUrlParser: true },
   (err) => {
     if (err) {
-      console.log(err);
+      console.log("errrrrrrrrrrrrr================="+err);
     } else {
       app.listen(3000);
     }
