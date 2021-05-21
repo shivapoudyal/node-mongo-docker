@@ -6,8 +6,6 @@ services:
     ports:
       - "3000:3000"
     container_name: node
-    env_file:
-      - ./mongo.env
     volumes:
       - ./:/app
       - /app/node_modules

@@ -1,11 +1,9 @@
-const { Schema, model } = require('mongoose');
 
-const shivaSchema = new Schema({
-  name: String,
-  movie_name: String,
-  desig: String
+var mongoose=require('mongoose');
+
+var shivaSchema = new mongoose.Schema({
+	name: String,
 });
 
-const mySchema = model('shiva_collection', shivaSchema);
-
-module.exports = mySchema;
+module.exports = mongoose.model(
+	'student', shivaSchema, 'shiva_collection');
