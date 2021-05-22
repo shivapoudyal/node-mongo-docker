@@ -22,5 +22,5 @@
 1) get inside mongodb container
 
 2) now, run this command (inside mongodb container)
-    mongoexport --uri mongodb+srv://prem@cluster0.vfu2v.mongodb.net/shiva_db --collection shiva_collection --out shivadb.json
+    mongoexport --uri mongodb+srv://prem@cluster0.vfu2v.mongodb.net/shiva_db --collection shiva_collection --out db_backup/shivadb.json #"db_backup" is mongodb container's mounted volume
     # will ask pass after this command
