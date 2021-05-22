@@ -1,5 +1,13 @@
+#-------------------------------------------------------- STAGING/PRODUCTION MONGODB CONNECTIVITY (db.env) FILES ------------------------------#
 
+1) Staging (db.env)
+    database = mongodb+srv://prem:12345@cluster0.vfu2v.mongodb.net/shiva_db?retryWrites=true&w=majority;
+            
+2) Production (db.env)            
+    database = mongodb+srv://shiva_prod:1234567890@cluster0.vfu2v.mongodb.net/production_db?retryWrites=true&w=majority
 
+#-------------------------------------------------------- NODE.JS ACCESS URL -----------------------------------#
+           
 1) Access api url - 'http://localhost:3000/api/findall'
 
 #-------------------------------------------------------- TERMINAL LOGIN PROCESS & EXPORT DB -----------------------------------#
