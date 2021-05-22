@@ -24,3 +24,9 @@
 2) now, run this command (inside mongodb container)
     mongoexport --uri mongodb+srv://prem@cluster0.vfu2v.mongodb.net/shiva_db --collection shiva_collection --out db_backup/shivadb.json #"db_backup" is mongodb container's mounted volume
     # will ask pass after this command
+
+3) IMPORT TO PRODUCTION DB
+        mongoimport --uri mongodb+srv://shiva_prod@cluster0.0pbc4.mongodb.net/production_db --collection production_collection --file db_backup/shivadb.json
+    
+ *prod user pass = 1234567890
+ *stag user pass = 12345
