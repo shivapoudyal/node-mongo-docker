@@ -1,3 +1,5 @@
+//database seprations = create individual db.env on staging and production server and mount while creating container on individual environment
+
 pipeline{
     agent any
     
