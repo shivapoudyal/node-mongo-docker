@@ -35,6 +35,11 @@ pipeline{
         
         stage('Deploy containe to production'){
             steps{
+            
+                // install plugin "SSH Agent"
+                // Sample step -> select 'sshagent' -> add username & private key -> private key (pem file) and username (ubuntu)
+                // also, grant docker access to ubuntu user -> sudo chown 1000:1000 /var/run/docker.sock
+                // create a network into production server (manually) -> docker network create -d bridge php_nginx_net
                 sshagent(['production-server']) {
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.46.160 $removeContainer"
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.46.160 $nodeContainer" //(if region same -> private ip, else -> public ip)
